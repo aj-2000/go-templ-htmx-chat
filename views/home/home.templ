@@ -1,0 +1,18 @@
+package home
+
+import "chat/views/layout"
+
+templ Home(name string) {
+	<div>Hello, { name }</div>
+}
+
+templ HomeIndex(
+    title,
+    username string,
+    isError bool,
+	errMsgs, sucMsgs []string,
+    ) {
+	@layout.Base(title, username, isError, errMsgs, sucMsgs) {
+		@Home(username)
+	}
+}

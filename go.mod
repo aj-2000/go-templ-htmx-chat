@@ -3,6 +3,7 @@ module chat
 go 1.22
 
 require (
+	github.com/a-h/templ v0.2.598
 	github.com/gorilla/websocket v1.5.1
 	github.com/labstack/echo/v4 v4.11.4
 )

@@ -39,7 +39,6 @@ func ChatHandler(c echo.Context, as *services.AppService) error {
 		// TODO: handle error
 		switch event.Type {
 		case models.JoinEvent:
-			log.Println("join event")
 			_ = as.RoomService.JoinRoom(event.RoomId, event.Username, ws)
 		case models.LeaveEvent:
 			_ = as.RoomService.LeaveRoom(event.RoomId, event.Username)
