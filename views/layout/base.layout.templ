@@ -1,8 +1,7 @@
 package layout
 
-import "chat/views/partials"
 
-templ Base(title, username string, isError bool, errMsgs, sucMsgs []string) {
+templ Base() {
 	<!DOCTYPE html>
 	<html lang="en" data-theme="dark">
 		<head>
@@ -10,24 +9,20 @@ templ Base(title, username string, isError bool, errMsgs, sucMsgs []string) {
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<meta
  				name="description"
- 				content="Go/Echo+Templ+Htmx: Full stack application using Golang's Echo framework & Templ templating language with user session management + CRUD to a SQLite database (To Do List) and HTMX in the frontend"
+ 				content="Websocket Chat App (GO+TEMPL+HTMX)"
 			/>
 			<meta name="google" content="notranslate"/>
+			// todo
 			<link rel="shortcut icon" href="/img/templ.png" type="image/png"/>
 			<script src="https://cdn.tailwindcss.com"></script>
 			<link rel="stylesheet" href="/css/styles.css"/>
-			<title>Todo List { title }</title>
+			<title>Chat App</title>
 			<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+			<script src="https://unpkg.com/htmx.org@1.9.11/dist/ext/ws.js"></script>
 		</head>
-		<body class="sample-transition" hx-boost="true">
-			<header>
-				if !isError {
-					@partials.Navbar(username)
-				}
-			</header>
-			<main class={ templ.KV("pt-40", !isError) }>
+		<body hx-boost="true">
+			<main>
 				{ children... }
-				@partials.FlashMessages(errMsgs, sucMsgs)
 			</main>
 		</body>
 	</html>

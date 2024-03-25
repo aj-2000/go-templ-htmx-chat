@@ -1,0 +1,1 @@
+templ generate --watch --proxy="http://localhost:6969" --cmd="go run ."

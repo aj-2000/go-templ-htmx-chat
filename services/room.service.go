@@ -1,6 +1,9 @@
 package services
 
 import (
+	"bytes"
+	"chat/views/chatroom"
+	"context"
 	"errors"
 	"time"
 
@@ -89,7 +92,16 @@ func (rs *RoomService) RemoveRoom(roomId string, username string) error {
 
 func (rs *RoomService) JoinRoom(roomId string, username string, ws *websocket.Conn) error {
 	if r, ok := rs.rooms[roomId]; ok {
+		var buf bytes.Buffer
+		chatroom.ChatRoom().Render(context.TODO(), &buf)
+		ws.WriteMessage(1, buf.Bytes())
+
 		return r.addParticipant(username, ws)
+	} else {
+		var buf bytes.Buffer
+		chatroom.ChatRoom().Render(context.TODO(), &buf)
+		ws.WriteMessage(1, buf.Bytes())
+		rs.rooms[roomId] = &room{id: roomId, participants: make(map[string]participant), messages: make([]message, 0), owner: username}
 	}
 	return errors.New("room does not exist")
 }

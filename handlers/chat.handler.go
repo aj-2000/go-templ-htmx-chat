@@ -3,6 +3,7 @@ package handlers
 import (
 	"chat/models"
 	"chat/services"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -28,6 +29,8 @@ func ChatHandler(c echo.Context, as *services.AppService) error {
 			log.Println(err)
 			continue
 		}
+
+		fmt.Printf("\n %s \n", message)
 
 		var event models.Event
 		err = event.Unmarshal(message)
